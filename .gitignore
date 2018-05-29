@@ -1,4 +1,9 @@
+# execution files
 a.out
 
+# directories
+./tmp
+
+# extensions
 *.ppm
 
