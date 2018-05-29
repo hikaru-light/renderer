@@ -2,7 +2,7 @@
 a.out
 
 # directories
-./tmp
+/tmp
 
 # extensions
 *.ppm
