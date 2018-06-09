@@ -4,10 +4,10 @@
 #include "vec.h"
 
 struct Ray {
-	Vec pos;
-	Vec dir;
+	Vec rayPos;
+	Vec rayDir;
 
-	Ray(const Vec &pos_, const Vec &dir_) : pos(pos_), dir(dir_) {};
+	Ray(const Vec &rayPos_, const Vec &rayDir_) : rayPos(rayPos_), rayDir(rayDir_) {};
 };
 
 #endif

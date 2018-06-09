@@ -3,29 +3,36 @@
 
 #include "vec.h"
 #include "ray.h"
+#include "hit.h"
 
 struct Sphere {
-	float rad;
-	Vec pos;
+	float sphRad;
+	Vec sphPos;
 
-	Sphere(float rad_, const Vec &pos_) : rad(rad_), pos(pos_) {};
+	Sphere(float sphRad_, const Vec &sphPos_) : sphRad(sphRad_), sphPos(sphPos_) {};
 
-    bool intersect(const Ray &ray) const {
-            float d_norm = (ray.dir).abs();
-            float oc_norm = (ray.pos - pos).abs();
+    bool intersect(const Ray ray) const {
+            float d_norm = (ray.rayDir).abs();
+            float oc_norm = (ray.rayPos - sphPos).abs();
 
             float a = d_norm * d_norm;
-            float b = 2 * (ray.dir).dot(ray.pos - pos);
-            float c = oc_norm * oc_norm - rad * rad;
+            float b = 2 * (ray.rayDir).dot(ray.rayPos - sphPos);
+            float c = oc_norm * oc_norm - sphRad * sphRad;
             float D = b*b - 4*a*c;
             if(D < 0) return false;
 
             float t1 = (-b - std::sqrt(D))/(2*a);
             float t2 = (-b + std::sqrt(D))/(2*a);
 
+            float t = t1;
             if(t1 < 0) {
+                t = t2;
                 if(t2 < 0) return false;
             }
+
+            // hit.t = t;
+            // hit.hitPos = ray.rayPos + t * ray.rayDir;
+            // hit.hitNorm = 
 
             return true;
         }   

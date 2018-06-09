@@ -25,7 +25,7 @@ struct Image {
     };
 
     void setPixel(int x, int y, const Vec &color) {
-        data[x*y] = color / 255.;
+        data[x*y] = color;
     };
 
     void ppm_output() const {
@@ -35,13 +35,15 @@ struct Image {
         for(int x=0; x<height; x++) {
             for(int y=0; y<width; y++) {
                 Vec p = this->getPixel(x, y);
-                int r = (int)(255*p.x);
-                int g = (int)(255*p.y);
-                int b = (int)(255*p.z);
+
+                int r = (int)(p.x);
+                int g = (int)(p.y);
+                int b = (int)(p.z);
+
                 outputfile
                     << r
                     << " "
-                    << r
+                    << g
                     << " "
                     << b
                     << "\n";

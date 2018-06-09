@@ -40,14 +40,14 @@ struct Vec {
 	};
 
 	Vec norm() {
-		return *this = *this * (1/sqrt(x*x+y*y+z*z));
+		return *this = *this * (1/abs());
 	};
 
 	float dot(const Vec &b) const {
 		return x*(b.x)+y*(b.y)+z*(b.z);
 	};
 
-	Vec cross(Vec &b) {
+	Vec cross(Vec b) {
 		return Vec(y*(b.z)-z*(b.y), z*(b.x)-x*(b.z), x*(b.y)-y*(b.x));
 	};
     
