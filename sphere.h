@@ -25,9 +25,9 @@ struct Sphere {
             float t2 = (-b + std::sqrt(D))/(2*a);
 
             float t = t1;
-            if(t1 < 0) {
+            if(t < 0) {
                 t = t2;
-                if(t2 < 0) return false;
+                if(t < 0) return false;
             }
 
             // hit.t = t;

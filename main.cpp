@@ -9,8 +9,8 @@ int main() {
     Camera cam(Vec(0., 0., 0.), Vec(0., 0., 1.));
     Sphere sph(1.0, Vec(0., 0., 5.));
 
-    for(int x=0; x<img.width; x++) {
-        for(int y=0; y<img.height; y++) {
+    for(int y=1; y<=img.height; y++) {
+        for(int x=1; x<=img.width; x++) {
             float u = (2.0*x - img.width)/img.width;
             float v = (2.0*y - img.height)/img.height;
             Ray ray = cam.getRay(u, v);

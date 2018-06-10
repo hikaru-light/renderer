@@ -24,7 +24,7 @@ struct Vec {
 	};
 
 	Vec operator*(float b) const {
-		return Vec(x*b, y*b, x*b);
+		return Vec(x*b, y*b, z*b);
 	};
 
     Vec operator/(float b) const {

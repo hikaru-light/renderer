@@ -21,19 +21,19 @@ struct Image {
     };
 
     Vec getPixel(int x, int y) const {
-        return data[x*y];
+        return data[(y-1)*width+(x-1)];
     };
 
     void setPixel(int x, int y, const Vec &color) {
-        data[x*y] = color;
+        data[(y-1)*width+(x-1)] = color;
     };
 
     void ppm_output() const {
         std::ofstream outputfile("test.ppm");
         outputfile << "P3\n" << width << " " << height << "\n255\n";
 
-        for(int x=0; x<height; x++) {
-            for(int y=0; y<width; y++) {
+        for(int y=1; y<=height; y++) {
+            for(int x=1; x<=width; x++) {
                 Vec p = this->getPixel(x, y);
 
                 int r = (int)(p.x);
