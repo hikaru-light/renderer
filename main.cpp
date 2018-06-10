@@ -15,14 +15,10 @@ int main() {
             float v = (2.0*y - img.height)/img.height;
             Ray ray = cam.getRay(u, v);
 
-            //img.setPixel(x, y, ray.rayDir);
-            //std::cout << ray.rayDir.x << " " << ray.rayDir.y << " " << ray.rayDir.z << "\n";
             if(sph.intersect(ray)) {
                 img.setPixel(x, y, Vec(255., 255., 255.));
-                std::cout << "HIT\n";
             } else {
                 img.setPixel(x, y, Vec(0., 0., 0.));
-                //std::cout << "MISS\n";
             }
         }
     }
