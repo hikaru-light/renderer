@@ -11,7 +11,7 @@ struct Sphere {
 
 	Sphere(float sphRad_, const Vec &sphPos_) : sphRad(sphRad_), sphPos(sphPos_) {};
 
-    bool intersect(const Ray ray) const {
+    bool intersect(const Ray ray, Hit &hit) const {
             float d_norm = (ray.rayDir).abs();
             float oc_norm = (ray.rayPos - sphPos).abs();
 
@@ -30,9 +30,9 @@ struct Sphere {
                 if(t < 0) return false;
             }
 
-            // hit.t = t;
-            // hit.hitPos = ray.rayPos + t * ray.rayDir;
-            // hit.hitNorm = 
+            hit.hitDis = t;
+            hit.hitPos = ray.rayPos + ray.rayDir * t;
+            hit.hitNorm = (hit.hitPos - sphPos).norm();
 
             return true;
         }   

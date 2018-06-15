@@ -36,9 +36,9 @@ struct Image {
             for(int x=1; x<=width; x++) {
                 Vec p = this->getPixel(x, y);
 
-                int r = (int)(p.x);
-                int g = (int)(p.y);
-                int b = (int)(p.z);
+                int r = (int)(p.x*255);
+                int g = (int)(p.y*255);
+                int b = (int)(p.z*255);
 
                 outputfile
                     << r
