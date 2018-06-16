@@ -1,9 +1,10 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-#include "vec.h"
 #include <iostream>
 #include <fstream>
+
+#include "vec.h"
 
 struct Image {
     int width;

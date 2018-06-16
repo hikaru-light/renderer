@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <memory>
+
 #include "ray.h"
 #include "hit.h"
 #include "sphere.h"

@@ -2,6 +2,7 @@
 #include <memory>
 #include <iostream>
 #include <random>
+
 #include "vec.h"
 #include "ray.h"
 #include "sphere.h"
@@ -37,7 +38,7 @@ int main() {
     Image img(512, 512);
     Camera cam(Vec(0., 0., -3.), Vec(0., 0., 1.));
 
-    Sphere sph(3.0, Vec(0., 0., 3.));
+    // Sphere sph(3.0, Vec(0., 0., 3.));
     Accel accel;
     accel.add(std::make_shared<Sphere>(Sphere(1., Vec(0, 0, 0))));
     accel.add(std::make_shared<Sphere>(Sphere(10000., Vec(0, -10001, 0))));
@@ -69,13 +70,6 @@ int main() {
                         color = Vec(1., 1., 1.) * I;
 
                         // img.setPixel(x, y, (hit.hitNorm + Vec(1., 1., 1.))/2.0 );
-                        // std::cout
-                        //     << ((hit.hitNorm + Vec(1., 1., 1.))/2.0).x
-                        //     << " "
-                        //     << ((hit.hitNorm + Vec(1., 1., 1.))/2.0).y
-                        //     << " "
-                        //     << ((hit.hitNorm + Vec(1., 1., 1.))/2.0).z
-                        //     << "\n";
                     }
                     else
                     {
