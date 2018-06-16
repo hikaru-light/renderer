@@ -84,7 +84,7 @@ int main() {
                 }
                 else
                 {
-                    color = Vec(0., 0., 0.);
+                    color = Vec(1., 1., 1.);
                 }
 
                 img.setPixel(x, y, img.getPixel(x, y)+color/100);
