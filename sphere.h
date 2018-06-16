@@ -35,7 +35,7 @@ struct Sphere {
             hit.hitNorm = (hit.hitPos - sphPos).norm();
 
             return true;
-        }   
+    }   
 };
 
 #endif

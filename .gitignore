@@ -3,6 +3,7 @@ a.out
 
 # directories
 /tmp
+/.vscode
 
 # extensions
 *.ppm
