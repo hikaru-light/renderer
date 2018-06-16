@@ -29,7 +29,7 @@ struct Image {
     };
 
     void ppm_output() const {
-        std::ofstream outputfile("test.ppm");
+        std::ofstream outputfile("sample.ppm");
         outputfile << "P3\n" << width << " " << height << "\n255\n";
 
         for(int y=1; y<=height; y++) {

@@ -1,11 +1,12 @@
-# execution files
-a.out
+# extensions
+*.ppm
+*.swp
+*.png
 
 # directories
 /tmp
 /.vscode
 
-# extensions
-*.ppm
-*.swp
-*.png
+# execution files
+a.out
+!/src/sample.png
