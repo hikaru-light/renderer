@@ -40,7 +40,7 @@ int main() {
 
     // Sphere sph(3.0, Vec(0., 0., 3.));
     Accel accel;
-    accel.add(std::make_shared<Sphere>(Sphere(1., Vec(0, 0, 0))));
+    accel.add(std::make_shared<Sphere>(Sphere(1., Vec(0, 0, 1))));
     accel.add(std::make_shared<Sphere>(Sphere(10000., Vec(0, -10001, 0))));
 
     // Vec lightDir = Vec(-1, 0.5, -1).norm();
