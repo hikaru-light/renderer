@@ -7,6 +7,6 @@
 /tmp
 /.vscode
 
-# execution files
+# files
 a.out
 !/src/sample.png
