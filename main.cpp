@@ -22,6 +22,17 @@ Vec reflect(const Vec& d, const Vec& n) {
     return d - n * 2 * d.dot(n);
 }
 
+Vec randomDir() {
+    float theta = 2 * M_PI * rnd();
+    float phi = std::acos(1-rnd());
+
+    float x = std::sin(theta)*std::cos(phi);
+    float y = std::cos(theta);
+    float z = std::sin(theta)*std::sin(phi);
+    
+    return Vec(x, y, z);
+}
+
 int main() {
     Image img(512, 512);
     Camera cam(Vec(0., 0., -3.), Vec(0., 0., 1.));
@@ -31,7 +42,7 @@ int main() {
     accel.add(std::make_shared<Sphere>(Sphere(1., Vec(0, 0, 0))));
     accel.add(std::make_shared<Sphere>(Sphere(10000., Vec(0, -10001, 0))));
 
-    Vec lightDir = Vec(-1, 0.5, -1).norm();
+    // Vec lightDir = Vec(-1, 0.5, -1).norm();
 
     #pragma omp parallel for
     for (int i = 0; i < 100; i++)
@@ -48,6 +59,7 @@ int main() {
 
                 if (accel.intersect(ray, hit))
                 {
+                    Vec lightDir = randomDir();
                     Ray shadowRay = Ray(hit.hitPos + hit.hitNorm * 0.01, lightDir);
                     Hit hit_shadow;
 
