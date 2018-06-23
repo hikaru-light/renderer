@@ -111,8 +111,8 @@ int main()
     Image img(512, 512);
     Camera cam(Vec(0., 0., -3.), Vec(0., 0., 1.));
 
-    accel.add(std::make_shared<Sphere>(Sphere(1., Vec(0, 0, 1), Vec(1, 0, 0), 0)));
-    accel.add(std::make_shared<Sphere>(Sphere(100000., Vec(0, -100001, 0), Vec(1, 1, 1), 0)));
+    accel.add(std::make_shared<Sphere>(Sphere(1., Vec(0, 0, 1), Vec(0, 0, 1), 0)));
+    accel.add(std::make_shared<Sphere>(Sphere(10000., Vec(0, -10001, 0), Vec(1, 1, 1), 0)));
 
     // Sphere sph(3.0, Vec(0., 0., 3.));
     // Vec lightDir = Vec(-1, 0.5, -1).norm();
