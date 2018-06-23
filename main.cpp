@@ -40,6 +40,29 @@ Vec randomDir()
     return Vec(x, y, z);
 }
 
+void orthonormalBasis (Vec& n, Vec& x, Vec& z) {
+    if(n.x > 0.9) x = Vec(0, 1, 0);
+    else x = Vec(1, 0, 0);
+
+    x = x - n * x.dot(n);
+    x = x.norm();
+    z = n.cross(x).norm();
+}
+
+Vec randomHemisphere(Vec& n) {
+    float u = rnd();
+    float v = rnd();
+
+    float x = std::sqrt(1-u*u) * std::cos(2*M_PI*v);
+    float y = u;
+    float z = std::sqrt(1-u*u) * std::sin(2*M_PI*v);
+
+    Vec xv, zv;
+    orthonormalBasis(n, xv,zv);
+
+    return xv*x + n*y + zv*z;
+}
+
 Vec getColor(const Ray& ray, int depth = 0)
 {
     if(depth > 100) return Vec(0, 0, 0);
@@ -49,21 +72,26 @@ Vec getColor(const Ray& ray, int depth = 0)
     {
         if (hit.hitSph->sphMat == 0)
         {
-            Vec lightDir = randomDir();
-            Ray shadowRay = Ray(hit.hitPos + hit.hitNorm * 0.01, lightDir);
-            Hit hit_shadow;
+            Ray nextRay(hit.hitPos +hit.hitNorm * 0.01, randomHemisphere(hit.hitNorm));
+            float cos_term = std::max(nextRay.rayDir.dot(hit.hitNorm), (float)0.0);
+            
+            return hit.hitSph -> sphCol * getColor(nextRay, depth+1) * cos_term;
 
-            if (!accel.intersect(shadowRay, hit_shadow))
-            {
-                float I = std::max(lightDir.dot(hit.hitNorm), (float)0.);
-                return hit.hitSph->sphCol * I;
+            // Vec lightDir = randomDir();
+            // Ray shadowRay = Ray(hit.hitPos + hit.hitNorm * 0.01, lightDir);
+            // Hit hit_shadow;
 
-                // img.setPixel(x, y, (hit.hitNorm + Vec(1., 1., 1.))/2.0 );
-            }
-            else
-            {
-                return Vec(0., 0., 0.);
-            }
+            // if (!accel.intersect(shadowRay, hit_shadow))
+            // {
+            //     float I = std::max(lightDir.dot(hit.hitNorm), (float)0.);
+            //     return hit.hitSph->sphCol * I;
+
+            //     // img.setPixel(x, y, (hit.hitNorm + Vec(1., 1., 1.))/2.0 );
+            // }
+            // else
+            // {
+            //     return Vec(0., 0., 0.);
+            // }
         }
         else if (hit.hitSph->sphMat == 1)
         {
@@ -74,7 +102,7 @@ Vec getColor(const Ray& ray, int depth = 0)
     }
     else
     {
-        return Vec(0, 0, 0);
+        return Vec(1, 1, 1);
     }
 }
 
@@ -84,7 +112,7 @@ int main()
     Camera cam(Vec(0., 0., -3.), Vec(0., 0., 1.));
 
     accel.add(std::make_shared<Sphere>(Sphere(1., Vec(0, 0, 1), Vec(1, 0, 0), 0)));
-    accel.add(std::make_shared<Sphere>(Sphere(100000., Vec(0, -100001, 0), Vec(1, 1, 1), 1)));
+    accel.add(std::make_shared<Sphere>(Sphere(100000., Vec(0, -100001, 0), Vec(1, 1, 1), 0)));
 
     // Sphere sph(3.0, Vec(0., 0., 3.));
     // Vec lightDir = Vec(-1, 0.5, -1).norm();
