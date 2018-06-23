@@ -5,4 +5,4 @@
 2. path tracing
 
 ![sample](./src/sample1.jpg "sample1")
-![sample](./src/sample.jpg "sample")
+![sample](./src/sample.png "sample")
