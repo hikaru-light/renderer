@@ -40,8 +40,8 @@ int main() {
 
     // Sphere sph(3.0, Vec(0., 0., 3.));
     Accel accel;
-    accel.add(std::make_shared<Sphere>(Sphere(1., Vec(0, 0, 0))));
-    accel.add(std::make_shared<Sphere>(Sphere(10000., Vec(0, -10001, 0))));
+    accel.add(std::make_shared<Sphere>(Sphere(1., Vec(0, 0, 1), Vec(0, 1, 0))));
+    accel.add(std::make_shared<Sphere>(Sphere(10000., Vec(0, -10001, 0), Vec(1, 1, 1))));
 
     // Vec lightDir = Vec(-1, 0.5, -1).norm();
 
@@ -67,7 +67,7 @@ int main() {
                     if (!accel.intersect(shadowRay, hit_shadow))
                     {
                         float I = std::max(lightDir.dot(hit.hitNorm), (float)0.);
-                        color = Vec(1., 1., 1.) * I;
+                        color = hit.hitSph -> sphCol * I;
 
                         // img.setPixel(x, y, (hit.hitNorm + Vec(1., 1., 1.))/2.0 );
                     }
