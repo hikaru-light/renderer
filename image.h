@@ -62,12 +62,11 @@ struct Image
         tmp
             << 1900 + t->tm_year << "-" << 1 + t->tm_mon << "-" << t->tm_mday
             << " "
-            << t->tm_hour << "." << t->tm_min << "." << t->tm_sec
-            << ".ppm";
+            << t->tm_hour << "." << t->tm_min << "." << t->tm_sec;
 
         std::string filename = tmp.str();
 
-        std::ofstream outputfile(filename);
+        std::ofstream outputfile("./img/" + filename + ".ppm");
         outputfile << "P3\n"
                    << width << " " << height << "\n255\n";
 

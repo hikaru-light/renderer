@@ -2,6 +2,7 @@
 *.ppm
 *.swp
 *.png
+*.jpg
 
 # directories
 /tmp
@@ -9,4 +10,5 @@
 
 # files
 a.out
+!/src/sample1.jpg
 !/src/sample.png
