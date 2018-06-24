@@ -3,11 +3,12 @@
 
 #include "vec.h"
 
-struct Ray {
+struct Ray
+{
 	Vec rayPos;
 	Vec rayDir;
 
-	Ray(const Vec &rayPos_, const Vec &rayDir_) : rayPos(rayPos_), rayDir(rayDir_) {};
+	Ray(const Vec &rayPos_, const Vec &rayDir_) : rayPos(rayPos_), rayDir(rayDir_){};
 };
 
 #endif

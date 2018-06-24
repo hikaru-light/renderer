@@ -8,25 +8,31 @@
 #include "hit.h"
 #include "sphere.h"
 
-struct Accel {
-    std::vector<std::shared_ptr<Sphere> > spheres;
+struct Accel
+{
+    std::vector<std::shared_ptr<Sphere>> spheres;
 
-    Accel() {};
+    Accel(){};
 
-    void add(std::shared_ptr<Sphere> p) {
+    void add(std::shared_ptr<Sphere> p)
+    {
         spheres.push_back(p);
     };
 
-    bool intersect(const Ray& ray, Hit& hit) const {
+    bool intersect(const Ray &ray, Hit &hit) const
+    {
         bool isHit = false;
 
         hit.hitDis = 1000000000;
         Hit hit_each;
 
-        for(auto p : spheres) {
-            if(p->intersect(ray, hit_each)) {
+        for (auto p : spheres)
+        {
+            if (p->intersect(ray, hit_each))
+            {
                 isHit = true;
-                if(hit_each.hitDis < hit.hitDis) {
+                if (hit_each.hitDis < hit.hitDis)
+                {
                     hit = hit_each;
                 }
             }

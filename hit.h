@@ -5,14 +5,15 @@
 
 class Sphere;
 
-struct Hit {
+struct Hit
+{
         float hitDis;
         Vec hitPos;
         Vec hitNorm;
-        const Sphere* hitSph;
+        const Sphere *hitSph;
 
         Hit() { hitSph = nullptr; };
-        Hit(float hitDis_, const Vec &hitPos_, const Vec &hitNorm_) : hitDis(hitDis_), hitPos(hitPos_), hitNorm(hitNorm_) {};
+        Hit(float hitDis_, const Vec &hitPos_, const Vec &hitNorm_) : hitDis(hitDis_), hitPos(hitPos_), hitNorm(hitNorm_){};
 };
 
 #endif

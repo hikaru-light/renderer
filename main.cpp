@@ -40,42 +40,47 @@ Vec randomDir()
     return Vec(x, y, z);
 }
 
-void orthonormalBasis (Vec& n, Vec& x, Vec& z) {
-    if(n.x > 0.9) x = Vec(0, 1, 0);
-    else x = Vec(1, 0, 0);
+void orthonormalBasis(Vec &n, Vec &x, Vec &z)
+{
+    if (n.x > 0.9)
+        x = Vec(0, 1, 0);
+    else
+        x = Vec(1, 0, 0);
 
     x = x - n * x.dot(n);
     x = x.norm();
     z = n.cross(x).norm();
 }
 
-Vec randomHemisphere(Vec& n) {
+Vec randomHemisphere(Vec &n)
+{
     float u = rnd();
     float v = rnd();
 
-    float x = std::sqrt(1-u*u) * std::cos(2*M_PI*v);
+    float x = std::sqrt(1 - u * u) * std::cos(2 * M_PI * v);
     float y = u;
-    float z = std::sqrt(1-u*u) * std::sin(2*M_PI*v);
+    float z = std::sqrt(1 - u * u) * std::sin(2 * M_PI * v);
 
     Vec xv, zv;
-    orthonormalBasis(n, xv,zv);
+    orthonormalBasis(n, xv, zv);
 
-    return xv*x + n*y + zv*z;
+    return xv * x + n * y + zv * z;
 }
 
-Vec getColor(const Ray& ray, int depth = 0)
+Vec getColor(const Ray &ray, int depth = 0)
 {
-    if(depth > 100) return Vec(0, 0, 0);
+    if (depth > 100)
+        return Vec(0, 0, 0);
 
     Hit hit;
     if (accel.intersect(ray, hit))
     {
         if (hit.hitSph->sphMat == 0)
         {
-            Ray nextRay(hit.hitPos +hit.hitNorm * 0.01, randomHemisphere(hit.hitNorm));
+            Ray nextRay(hit.hitPos + hit.hitNorm * 0.01, randomHemisphere(hit.hitNorm));
             float cos_term = std::max(nextRay.rayDir.dot(hit.hitNorm), (float)0.0);
-            
-            return hit.hitSph -> sphCol * getColor(nextRay, depth+1) * cos_term;
+
+            return hit.hitSph->sphCol * getColor(nextRay, depth + 1) * cos_term;
 
             // Vec lightDir = randomDir();
             // Ray shadowRay = Ray(hit.hitPos + hit.hitNorm * 0.01, lightDir);
@@ -97,7 +102,11 @@ Vec getColor(const Ray& ray, int depth = 0)
         {
             Ray nextRay(hit.hitPos + hit.hitNorm * 0.01, reflect(ray.rayDir, hit.hitNorm));
 
-            return getColor(nextRay, depth+1);
+            return getColor(nextRay, depth + 1);
+        }
+        else
+        {
+            return Vec(0, 0, 0);
         }
     }
     else
@@ -129,7 +138,7 @@ int main()
                 Ray ray = cam.getRay(u, v);
 
                 color = getColor(ray);
-                
+
                 img.setPixel(x, y, img.getPixel(x, y) + color / 100);
             }
         }

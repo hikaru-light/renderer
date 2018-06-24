@@ -37,7 +37,7 @@ struct Vec
 
 	Vec operator*(Vec b) const
 	{
-		return Vec(x*b.x, y*b.y, z*b.z);
+		return Vec(x * b.x, y * b.y, z * b.z);
 	};
 
 	Vec operator/(float b) const
