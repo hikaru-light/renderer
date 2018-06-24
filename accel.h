@@ -9,7 +9,7 @@
 #include "sphere.h"
 
 struct Accel {
-    std::vector<std::shared_ptr<Sphere> > spheres;
+    std::vector<std::shared_ptr<Sphere>> spheres;
 
     Accel() {};
 

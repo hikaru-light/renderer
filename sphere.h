@@ -8,10 +8,11 @@
 struct Sphere {
 	float sphRad;
 	Vec sphPos;
+    Vec sphEmi;
     Vec sphCol;
     int sphMat;
 
-	Sphere(float sphRad_, const Vec &sphPos_, const Vec& sphCol_, const int& sphMat_) : sphRad(sphRad_), sphPos(sphPos_), sphCol(sphCol_), sphMat(sphMat_) {};
+	Sphere(const float sphRad_, const Vec &sphPos_, const Vec& sphEmi_, const Vec& sphCol_, const int sphMat_) : sphRad(sphRad_), sphPos(sphPos_), sphEmi(sphEmi_), sphCol(sphCol_), sphMat(sphMat_) {};
 
     bool intersect(const Ray ray, Hit &hit) const {
             float d_norm = (ray.rayDir).abs();
