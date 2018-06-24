@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <fstream>
+#include <ctime>
+#include <sstream>
 
 #include "vec.h"
 
@@ -52,7 +54,20 @@ struct Image
 
     void ppm_output() const
     {
-        std::ofstream outputfile("sample.ppm");
+        std::time_t now = std::time(0);
+        std::tm *t = std::localtime(&now);
+
+        std::stringstream tmp;
+
+        tmp
+            << 1900 + t->tm_year << "-" << 1 + t->tm_mon << "-" << t->tm_mday
+            << " "
+            << t->tm_hour << "." << t->tm_min << "." << t->tm_sec
+            << ".ppm";
+
+        std::string filename = tmp.str();
+
+        std::ofstream outputfile(filename);
         outputfile << "P3\n"
                    << width << " " << height << "\n255\n";
 

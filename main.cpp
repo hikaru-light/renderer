@@ -69,7 +69,7 @@ Vec randomHemisphere(Vec &n)
 
 Vec getColor(const Ray &ray, int depth = 0)
 {
-    if (depth > 100)
+    if (depth > 2)
         return Vec(0, 0, 0);
 
     Hit hit;
