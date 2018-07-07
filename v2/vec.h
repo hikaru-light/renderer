@@ -7,7 +7,7 @@ struct Vec3
 {
     double x, y, z;
 
-    Vec3(const double x_ = 0, const double y_ = 0, const double z_ = 0) : x(x_), y(y_), z(z_) {}
+    Vec3(const double x_ = 0, const double y_ = 0, const double z_ = 0) : x(x_), y(y_), z(z_) {};
 
     inline Vec3 operator+(const Vec3 &b) const
     {
