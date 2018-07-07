@@ -4,6 +4,7 @@
 #include <ctime>
 #include <string>
 #include <sstream>
+#include <fstream>
 
 #include "vec.h"
 
@@ -31,9 +32,39 @@ struct Image
         data = new Vec3[width * height];
     }
 
+    ~Image()
+    {
+        delete[] data;
+    }
+
+    Vec3 getPixel(int x, int y) const
+    {
+        return data[width * (y - 1) + x - 1];
+    }
+
     void output_ppm()
     {
         std::string filename = getTimestamp() + ".ppm";
+
+        std::ofstream outputfile("./img/" + filename);
+        outputfile
+            << "P3\n"
+            << width << " " << height << "\n"
+            << "255\n";
+
+        for(int y=1; y<=height; y++)
+        {
+            for(int x=1; x<=width; x++)
+            {   
+                Vec3 pixel = this -> getPixel(x, y);
+                outputfile
+                    << pixel.x << " "
+                    << pixel.y << " "
+                    << pixel.z << "\n";
+            }
+        }
+
+        outputfile.close();
     }
 };
 
