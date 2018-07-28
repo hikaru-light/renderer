@@ -69,7 +69,7 @@ Vec randomHemisphere(Vec &n)
 
 Vec getColor(const Ray &ray, int depth = 0)
 {
-    if (depth > 2)
+    if (depth > 3)
         return Vec(0, 0, 0);
 
     Hit hit;
@@ -125,9 +125,13 @@ int main()
 
     // Sphere sph(3.0, Vec(0., 0., 3.));
     // Vec lightDir = Vec(-1, 0.5, -1).norm();
-
+		
+		int sample;
+		std::cout << "Enter sampling number :          ";
+		std::cin >> sample;
+		int prog = 1;
 #pragma omp parallel for
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < sample; i++)
     {
         for (int y = 1; y <= img.height; y++)
         {
@@ -142,10 +146,17 @@ int main()
                 img.setPixel(x, y, img.getPixel(x, y) + color / 100);
             }
         }
+				
+				if(i * 100 / sample == prog) {
+						// std::cout << prog * 100 / 12 << " " << std::flush;
+						std::cout << ">>>" << std::flush;
+						prog++;
+				} else {}
     }
 
     img.gammma_correction();
     img.ppm_output();
+		std::cout << std::endl;
 
     return 0;
 }
